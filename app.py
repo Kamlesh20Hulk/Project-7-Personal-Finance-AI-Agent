@@ -96,9 +96,18 @@ if st.button("Calculate"):
         with st.spinner("Thinking..."):
             try:
                 response = finance_agent.invoke({"messages": [{"role": "user", "content": user_query}]})
-                answer = response["messages"][-1].content
-                st.success("Result")
-                st.write(answer)
+                raw_answer = response["messages"][-1].content
+
+if isinstance(raw_answer, list):
+    answer = "".join(
+        item.get("text", "") if isinstance(item, dict) else str(item)
+        for item in raw_answer
+    )
+else:
+    answer = str(raw_answer)
+
+st.success("Result")
+st.write(answer)
             except Exception as e:
                 st.error(f"Something went wrong: {e}")
 
