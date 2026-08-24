@@ -64,7 +64,7 @@ def budget_planner(monthly_income: float) -> str:
         return "Unable to create budget plan."
 
 # Cloud-ready replacement for the local Ollama model.
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0)
 
 finance_agent = create_agent(
     model=llm,
